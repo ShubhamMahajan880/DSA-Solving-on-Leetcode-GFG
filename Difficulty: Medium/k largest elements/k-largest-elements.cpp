@@ -1,13 +1,17 @@
-class Solution {
+class Solution{
 public:
-vector<int> kLargest(vector<int>& arr, int k) {
-priority_queue<int> pq;
-for (int x : arr) pq.push(x);
-vector<int> res;
-while (k--) {
-res.push_back(pq.top());
-pq.pop();
-}
-return res;
-}
+    vector<int> kLargest(vector<int>& arr, int k){
+        priority_queue<int, vector<int>, greater<int>> pq;
+        for(int x: arr){
+            pq.push(x);
+            if(pq.size()>k) pq.pop();
+        }
+        vector<int> res;
+        while(!pq.empty()){
+            res.push_back(pq.top());
+            pq.pop();
+        }
+        sort(res.begin(),res.end(),greater<int>());
+        return res;
+    }
 };
