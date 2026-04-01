@@ -1,12 +1,12 @@
-class Solution {
-public:
-    vector<int> nextLargerElement(vector<int>& arr) {
+class Solution{
+    public:
+    vector<int> nextLargerElement(vector<int>& arr){
         int n = arr.size();
-        vector<int> ans(n);
         stack<int> st;
+        vector<int> ans(n);
         
-        for(int i = n - 1; i >= 0; i--) {
-            while(!st.empty() && st.top() <= arr[i]) {
+        for(int i = n - 1; i >= 0; i--){
+            while(!st.empty() && st.top() <= arr[i]){
                 st.pop();
             }
             
