@@ -9,6 +9,7 @@ public:
         for (int right = 0; right < n; ++right) {
             sum += a[right];
 
+            // shrink window while valid
             while (sum >= tar) {
                 minLen = min(minLen, right - left + 1);
                 sum -= a[left];
