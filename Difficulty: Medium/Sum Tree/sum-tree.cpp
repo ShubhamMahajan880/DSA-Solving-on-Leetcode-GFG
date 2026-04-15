@@ -10,7 +10,7 @@ public:
         auto right = solve(root->right);
         
         bool isValid = left.first && right.first && (root->data == left.second + right.second);
-        
+        // 
         return {isValid, left.second + right.second + root->data};
     }
     
