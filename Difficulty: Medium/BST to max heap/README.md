@@ -1,4 +1,4 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/bst-to-max-heap/1">BST to max heap</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a&nbsp;Binary Search Tree. Convert a given BST into a Special Max Heap with the condition that all the values in the left subtree of a node should be less than all the values in the right subtree of the node. This condition is applied on all the nodes in the so converted Max Heap.</span></p>
+<h2><a href="https://www.geeksforgeeks.org/problems/bst-to-max-heap/1">BST to max heap</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO" style="--text-color: var(--problem-text-color);"><p><span style="font-size:18px">Given a&nbsp;Binary Search Tree. Convert a given BST into a Special Max Heap with the condition that all the values in the left subtree of a node should be less than all the values in the right subtree of the node. This condition is applied on all the nodes in the so converted Max Heap.</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
