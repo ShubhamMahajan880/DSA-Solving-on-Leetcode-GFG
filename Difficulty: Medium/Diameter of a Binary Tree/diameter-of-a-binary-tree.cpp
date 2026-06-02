@@ -3,10 +3,13 @@ public:
     int ans = 0;
 
     int height(Node* root) {
-        if (root == NULL) return -1;
+        if(!root) return 0;
+
         int lh = height(root->left);
         int rh = height(root->right);
-        ans = max(ans, lh + rh + 2);
+
+        ans = max(ans, lh + rh);
+
         return 1 + max(lh, rh);
     }
 
