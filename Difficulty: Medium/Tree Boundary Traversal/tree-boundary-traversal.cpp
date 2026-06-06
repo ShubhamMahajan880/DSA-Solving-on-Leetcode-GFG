@@ -1,53 +1,66 @@
 class Solution {
-  public:
-    bool isLeaf(Node* node){
-        return !node->left && !node->right;
+public:
+    bool isLeaf(Node* root) {
+        return root && !root->left && !root->right;
     }
-    
-    void leftBoundary(Node* root, vector<int>& res){
-        Node* curr = root->left;
-        while(curr){
-            if(!isLeaf(curr)) res.push_back(curr->data);
-            if(curr->left) curr = curr->left;
-            else curr = curr->right;
+
+    void leftBoundary(Node* root, vector<int>& ans) {
+        Node* cur = root->left;
+
+        while(cur) {
+            if(!isLeaf(cur))
+                ans.push_back(cur->data);
+
+            if(cur->left)
+                cur = cur->left;
+            else
+                cur = cur->right;
         }
     }
-    
-    void addLeaves(Node* root, vector<int>& res){
-        if(isLeaf(root)){
-            res.push_back(root->data);
+
+    void addLeaves(Node* root, vector<int>& ans) {
+        if(!root) return;
+
+        if(isLeaf(root)) {
+            ans.push_back(root->data);
             return;
         }
-        
-        if(root->left) addLeaves(root->left, res);
-        if(root->right) addLeaves(root->right, res);
+
+        addLeaves(root->left, ans);
+        addLeaves(root->right, ans);
     }
-    
-    void rightBoundary(Node* root, vector<int>& res){
+
+    void rightBoundary(Node* root, vector<int>& ans) {
         vector<int> temp;
-        Node* curr = root->right;
-        
-        while(curr){
-            if(!isLeaf(curr)) temp.push_back(curr->data);
-            if(curr->right) curr = curr->right;
-            else curr = curr->left;
+        Node* cur = root->right;
+
+        while(cur) {
+            if(!isLeaf(cur))
+                temp.push_back(cur->data);
+
+            if(cur->right)
+                cur = cur->right;
+            else
+                cur = cur->left;
         }
-        
-        for(int i = temp.size() - 1; i >= 0; i--){
-            res.push_back(temp[i]);
+
+        for(int i = temp.size() - 1; i >= 0; i--) {
+            ans.push_back(temp[i]);
         }
     }
-    
-    vector<int> boundaryTraversal(Node *root){
-        vector<int> res;
-        if(!root) return res;
-        
-        if(!isLeaf(root)) res.push_back(root->data);
-        
-        leftBoundary(root, res);
-        addLeaves(root, res);
-        rightBoundary(root, res);
-        
-        return res;
+
+    vector<int> boundaryTraversal(Node *root) {
+        vector<int> ans;
+
+        if(!root) return ans;
+
+        if(!isLeaf(root))
+            ans.push_back(root->data);
+
+        leftBoundary(root, ans);
+        addLeaves(root, ans);
+        rightBoundary(root, ans);
+
+        return ans;
     }
 };
