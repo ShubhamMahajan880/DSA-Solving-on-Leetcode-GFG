@@ -1,24 +1,28 @@
 class Solution {
-  public:
-    int kthSmallest(Node *root, int K) {
-        stack<Node*> st;
-        Node* curr = root;
-        
-        while(curr != NULL || !st.empty()){
-            while(curr != NULL){
-                st.push(curr);
-                curr = curr->left;
-            }
-            
-            curr = st.top();
-            st.pop();
-            
-            K--;
-            if(K == 0) return curr->data;
-            
-            curr = curr->right;
+public:
+    int cnt = 0;
+    int ans = -1;
+
+    void inorder(Node* root, int k) {
+        if(!root || ans != -1) return;
+
+        inorder(root->left, k);
+
+        cnt++;
+        if(cnt == k) {
+            ans = root->data;
+            return;
         }
-        
-        return -1;
+
+        inorder(root->right, k);
+    }
+
+    int kthSmallest(Node *root, int k) {
+        cnt = 0;
+        ans = -1;
+
+        inorder(root, k);
+
+        return ans;
     }
 };
