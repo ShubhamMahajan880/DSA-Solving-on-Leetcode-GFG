@@ -1,13 +1,16 @@
 class Solution {
 public:
-bool solve(Node* root, long long minv, long long maxv) {
-if (root == NULL) return true;
-if (root->data <= minv || root->data >= maxv) return false;
-return solve(root->left, minv, root->data) &&
-solve(root->right, root->data, maxv);
-}
+    bool solve(Node* root, long long mn, long long mx) {
+        if(!root) return true;
 
-bool isBST(Node* root) {
-return solve(root, LLONG_MIN, LLONG_MAX);
-}
+        if(root->data <= mn || root->data >= mx)
+            return false;
+
+        return solve(root->left, mn, root->data) &&
+               solve(root->right, root->data, mx);
+    }
+
+    bool isBST(Node* root) {
+        return solve(root, LLONG_MIN, LLONG_MAX);
+    }
 };
