@@ -1,14 +1,18 @@
 class Solution {
-  public:
+public:
     Node* LCA(Node* root, Node* n1, Node* n2) {
-        while(root){
-            if(root->data > n1->data && root->data > n2->data)
+        while(root) {
+            if(root->data > n1->data && root->data > n2->data) {
                 root = root->left;
-            else if(root->data < n1->data && root->data < n2->data)
+            }
+            else if(root->data < n1->data && root->data < n2->data) {
                 root = root->right;
-            else
+            }
+            else {
                 return root;
+            }
         }
+
         return NULL;
     }
 };
