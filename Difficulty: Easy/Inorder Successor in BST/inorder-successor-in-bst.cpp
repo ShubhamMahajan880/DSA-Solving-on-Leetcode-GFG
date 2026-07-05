@@ -1,18 +1,17 @@
 class Solution {
-  public:
+public:
     int inOrderSuccessor(Node* root, Node* x) {
-        Node* succ = NULL;
-        
-        while(root){
-            if(x->data < root->data){
-                succ = root;
+        int ans = -1;
+
+        while(root) {
+            if(root->data > x->data) {
+                ans = root->data;
                 root = root->left;
             } else {
                 root = root->right;
             }
         }
-        
-        if(succ) return succ->data;
-        return -1;
+
+        return ans;
     }
 };
