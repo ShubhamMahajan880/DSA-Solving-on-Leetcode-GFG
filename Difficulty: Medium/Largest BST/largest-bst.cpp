@@ -1,11 +1,11 @@
-class Info{
+class Info {
 public:
     int size;
     int minVal;
     int maxVal;
     bool isBST;
-    
-    Info(int s, int mn, int mx, bool bst){
+
+    Info(int s, int mn, int mx, bool bst) {
         size = s;
         minVal = mn;
         maxVal = mx;
@@ -13,26 +13,22 @@ public:
     }
 };
 
-class Solution{
+class Solution {
 public:
-    int ans = 0;
-    
-    Info solve(Node* root){
-        if(!root){
+    Info solve(Node* root, int &ans) {
+        if(root == NULL)
             return Info(0, INT_MAX, INT_MIN, true);
-        }
-        
-        Info left = solve(root->left);
-        Info right = solve(root->right);
-        
+
+        Info left = solve(root->left, ans);
+        Info right = solve(root->right, ans);
+
         if(left.isBST && right.isBST &&
            root->data > left.maxVal &&
-           root->data < right.minVal){
-            
+           root->data < right.minVal) {
+
             int sz = left.size + right.size + 1;
-            
             ans = max(ans, sz);
-            
+
             return Info(
                 sz,
                 min(root->data, left.minVal),
@@ -40,12 +36,13 @@ public:
                 true
             );
         }
-        
+
         return Info(0, INT_MIN, INT_MAX, false);
     }
-    
-    int largestBst(Node *root){
-        solve(root);
+
+    int largestBst(Node *root) {
+        int ans = 0;
+        solve(root, ans);
         return ans;
     }
 };
