@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool identical(Node* a, Node* b) {
+        if(a == NULL && b == NULL)
+            return true;
+
+        if(a == NULL || b == NULL)
+            return false;
+
+        return a->data == b->data &&
+               identical(a->left, b->left) &&
+               identical(a->right, b->right);
+    }
+
+    bool isSubTree(Node* T, Node* S) {
+        if(S == NULL)
+            return true;
+
+        if(T == NULL)
+            return false;
+
+        if(identical(T, S))
+            return true;
+
+        return isSubTree(T->left, S) ||
+               isSubTree(T->right, S);
+    }
+};
