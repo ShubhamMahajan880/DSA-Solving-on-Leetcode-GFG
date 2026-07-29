@@ -1,22 +1,32 @@
 class Solution {
-  public:
+public:
     Node* prev = NULL;
-    
-    Node* bToDLL(Node* root) {
-        if(!root) return NULL;
-        
-        Node* head = bToDLL(root->left);
-        
-        if(prev == NULL) head = root;
+    Node* head = NULL;
+
+    void inorder(Node* root) {
+        if(root == NULL)
+            return;
+
+        inorder(root->left);
+
+        if(prev == NULL)
+            head = root;
         else {
-            root->left = prev;
             prev->right = root;
+            root->left = prev;
         }
-        
+
         prev = root;
-        
-        bToDLL(root->right);
-        
+
+        inorder(root->right);
+    }
+
+    Node* treeToDLL(Node* root) {
+        prev = NULL;
+        head = NULL;
+
+        inorder(root);
+
         return head;
     }
 };
