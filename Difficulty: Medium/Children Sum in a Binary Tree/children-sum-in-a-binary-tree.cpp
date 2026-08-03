@@ -1,7 +1,10 @@
 class Solution {
 public:
     int isSumProperty(Node *root) {
-        if(!root || (!root->left && !root->right))
+        if(root == NULL)
+            return 1;
+
+        if(root->left == NULL && root->right == NULL)
             return 1;
 
         int sum = 0;
@@ -12,8 +15,10 @@ public:
         if(root->right)
             sum += root->right->data;
 
-        return (root->data == sum) &&
-               isSumProperty(root->left) &&
+        if(root->data != sum)
+            return 0;
+
+        return isSumProperty(root->left) &&
                isSumProperty(root->right);
     }
 };
