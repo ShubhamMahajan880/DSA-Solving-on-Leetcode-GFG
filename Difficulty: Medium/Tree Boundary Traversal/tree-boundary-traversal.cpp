@@ -1,10 +1,10 @@
 class Solution {
 public:
     bool isLeaf(Node* root) {
-        return root && !root->left && !root->right;
+        return root->left == NULL && root->right == NULL;
     }
 
-    void leftBoundary(Node* root, vector<int>& ans) {
+    void addLeftBoundary(Node* root, vector<int>& ans) {
         Node* cur = root->left;
 
         while(cur) {
@@ -19,7 +19,8 @@ public:
     }
 
     void addLeaves(Node* root, vector<int>& ans) {
-        if(!root) return;
+        if(root == NULL)
+            return;
 
         if(isLeaf(root)) {
             ans.push_back(root->data);
@@ -30,9 +31,9 @@ public:
         addLeaves(root->right, ans);
     }
 
-    void rightBoundary(Node* root, vector<int>& ans) {
-        vector<int> temp;
+    void addRightBoundary(Node* root, vector<int>& ans) {
         Node* cur = root->right;
+        vector<int> temp;
 
         while(cur) {
             if(!isLeaf(cur))
@@ -44,22 +45,22 @@ public:
                 cur = cur->left;
         }
 
-        for(int i = temp.size() - 1; i >= 0; i--) {
+        for(int i = temp.size() - 1; i >= 0; i--)
             ans.push_back(temp[i]);
-        }
     }
 
     vector<int> boundaryTraversal(Node *root) {
         vector<int> ans;
 
-        if(!root) return ans;
+        if(root == NULL)
+            return ans;
 
         if(!isLeaf(root))
             ans.push_back(root->data);
 
-        leftBoundary(root, ans);
+        addLeftBoundary(root, ans);
         addLeaves(root, ans);
-        rightBoundary(root, ans);
+        addRightBoundary(root, ans);
 
         return ans;
     }
