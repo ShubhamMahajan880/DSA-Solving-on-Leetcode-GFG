@@ -3,7 +3,7 @@ public:
     int ans = 0;
 
     int height(Node* root) {
-        if(root == NULL)
+        if (root == nullptr)
             return 0;
 
         int left = height(root->left);
