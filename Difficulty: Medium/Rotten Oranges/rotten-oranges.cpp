@@ -1,42 +1,48 @@
 class Solution {
 public:
-    int orangesRot(vector<vector<int>>& grid) {
-        queue<pair<int,int>> q;
-        int n = grid.size(), m = grid[0].size();
-        int fresh = 0, time = 0;
-        
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++){
-                if(grid[i][j] == 2) q.push({i, j});
-                if(grid[i][j] == 1) fresh++;
+    int orangesRot(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int m = mat[0].size();
+
+        queue<pair<int, int>> q;
+        int fresh = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 2)
+                    q.push({i, j});
+                else if (mat[i][j] == 1)
+                    fresh++;
             }
         }
-        
-        vector<int> dx = {-1, 0, 1, 0};
-        vector<int> dy = {0, 1, 0, -1};
-        
-        while(!q.empty() && fresh > 0){
+
+        int time = 0;
+        int dr[] = {-1, 1, 0, 0};
+        int dc[] = {0, 0, -1, 1};
+
+        while (!q.empty() && fresh > 0) {
             int size = q.size();
-            time++;
-            
-            for(int i = 0; i < size; i++){
-                auto front = q.front();
+
+            while (size--) {
+                auto [r, c] = q.front();
                 q.pop();
-                
-                for(int d = 0; d < 4; d++){
-                    int nx = front.first + dx[d];
-                    int ny = front.second + dy[d];
-                    
-                    if(nx >= 0 && ny >= 0 && nx < n && ny < m && grid[nx][ny] == 1){
-                        grid[nx][ny] = 2;
-                        q.push({nx, ny});
+
+                for (int k = 0; k < 4; k++) {
+                    int nr = r + dr[k];
+                    int nc = c + dc[k];
+
+                    if (nr >= 0 && nr < n && nc >= 0 && nc < m &&
+                        mat[nr][nc] == 1) {
+                        mat[nr][nc] = 2;
                         fresh--;
+                        q.push({nr, nc});
                     }
                 }
             }
+
+            time++;
         }
-        
-        if(fresh > 0) return -1;
-        return time;
+
+        return fresh == 0 ? time : -1;
     }
 };
