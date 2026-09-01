@@ -1,22 +1,25 @@
 class Solution {
 public:
     int maxLength(vector<int>& arr) {
-        unordered_map<int,int> mp;
-        int sum = 0;
-        int maxi = 0;
-        
-        for(int i = 0; i < arr.size(); i++){
+        unordered_map<long long, int> first;
+
+        long long sum = 0;
+        int ans = 0;
+
+        for (int i = 0; i < arr.size(); i++) {
             sum += arr[i];
-            
-            if(sum == 0) maxi = i + 1;
-            
-            if(mp.find(sum) != mp.end()){
-                maxi = max(maxi, i - mp[sum]);
+
+            if (sum == 0) {
+                ans = i + 1;
+            }
+
+            if (first.find(sum) != first.end()) {
+                ans = max(ans, i - first[sum]);
             } else {
-                mp[sum] = i;
+                first[sum] = i;
             }
         }
-        
-        return maxi;
+
+        return ans;
     }
 };
